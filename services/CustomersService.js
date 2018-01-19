@@ -50,8 +50,6 @@ var soapCallout = function (wsdlMetaSoap, operationMetaSoap, requestData, reques
 };
 
 class CustomersService {
-    constructor() {
-    }
 
     getCustomers(res) {
         //All business logic here
@@ -73,7 +71,7 @@ class CustomersService {
         console.log('inicia llamada a customers');
         soapCallout(wsdlMetaSoapCustomer, operationMetaSoapGetCustomer, requestArgs, customRequestHeader, customerHandler);
     }
-}
+};
 
 
 /*
