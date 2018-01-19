@@ -2,21 +2,17 @@
 
 var CustomersService = require('../services/CustomersService');
 
-class CustomersController {
-    constructor(router) {
-        this.router = router;
-        this.registerRoutes();
-    }
+function CustomersController(router) {
+    this.router = router;
+    this.registerRoutes();
+}
 
-    registerRoutes() {
-        console.log('Calling Service');
-        this.router.get('/customers', this.getCustomers.bind(this));
-    }
+CustomersController.prototype.registerRoutes = function() {
+    this.router.get('/customers', this.getCustomers.bind(this));
+}
 
-    getCustomers(req, res) {
-        CustomersService.getCustomers(res);
-    }
-
+CustomersController.prototype.getCustomers = function(req, res) {
+    CustomersService.getCustomers(res);
 }
 
 module.exports = CustomersController;
