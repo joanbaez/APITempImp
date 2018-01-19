@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="CustomerMailService" targetNamespace="http://mx.altan/CustomersMail/v1" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://mx.altan/CustomersMail/v1" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  	<wsdl:types>
+		<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://mx.altan/CustomersMail/v1">	
+			
+			<xsd:element name="getCustomerEmailRequest">	
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="idCustomer" type="xsd:long"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="getCustomerEmailResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element minOccurs="0" name="email" type="xsd:string"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:schema>
+    </wsdl:types>
+	
+	<wsdl:message name="getCustomerEmailRequest">
+	<wsdl:part element="tns:getCustomerEmailRequest" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getCustomerEmailResponse">
+		<wsdl:part element="tns:getCustomerEmailResponse" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	
+    <wsdl:portType name="CustomersMailPortType">
+		<wsdl:operation name="getCustomerEmail">
+			<wsdl:input message="tns:getCustomerEmailRequest"/>
+			<wsdl:output message="tns:getCustomerEmailResponse"/>
+		</wsdl:operation>
+    </wsdl:portType>
+
+
+	<wsdl:binding name="CustomersMailBinding" type="tns:CustomersMailPortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="getCustomerEmail">
+            <soap:operation soapAction="http://mx.altan/CustomersMail/v1/getCustomerEmail" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+			<wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+	<wsdl:service name="CustomersMailService">
+		<wsdl:port binding="tns:CustomersMailBinding" name="CustomersMailPort">
+			<soap:address location="http://spring-night-6859.getsandbox.com/CustomersMail/v1"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

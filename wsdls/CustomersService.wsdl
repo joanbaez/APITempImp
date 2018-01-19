@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="CustomerService" targetNamespace="http://mx.altan/Customers/v1" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://mx.altan/Customers/v1" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  	<wsdl:types>
+		<xsd:schema elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://mx.altan/Customers/v1">	
+			
+			<xsd:element name="getCustomerRequest">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element minOccurs="0" name="idCustomer" type="xsd:long"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			
+			<xsd:element name="getCustomerResponse">
+				<xsd:complexType name="getCustomerRes">
+					<xsd:sequence>
+						<xsd:element name="userName" type="xsd:string"/>
+						<xsd:element name="firstName" type="xsd:string"/>
+						<xsd:element name="lastName" type="xsd:string"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:schema>
+    </wsdl:types>
+
+	<wsdl:message name="getCustomerRequest">
+		<wsdl:part element="tns:getCustomerRequest" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getCustomerResponse">
+		<wsdl:part element="tns:getCustomerResponse" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	
+    <wsdl:portType name="CustomersPortType">
+		<wsdl:operation name="getCustomer">
+			<wsdl:input message="tns:getCustomerRequest"/>
+			<wsdl:output message="tns:getCustomerResponse"/>
+		</wsdl:operation>
+    </wsdl:portType>
+
+
+	<wsdl:binding name="CustomersBinding" type="tns:CustomersPortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="getCustomer">
+            <soap:operation soapAction="http://mx.altan/Customers/v1/getCustomer" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+			<wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+	<wsdl:service name="CustomersService">
+		<wsdl:port binding="tns:CustomersBinding" name="CustomersPort">
+			<soap:address location="http://quiet-morning-3864.getsandbox.com/Customers/v1"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
